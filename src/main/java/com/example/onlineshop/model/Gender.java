@@ -1,9 +1,20 @@
 package com.example.onlineshop.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+public enum Gender {
+    MAN("Мужской"),
+    WOMAN("Женский");
 
-@Entity
-@Table(name = "genders")
-public class Gender extends NamedEntity{
+    private final String gender;
+
+    Gender(String gender) {
+        this.gender = gender;
+    }
+
+    public boolean isSame(String gender){
+        return this.gender.equals(gender);
+    }
+
+    public String getGender() {
+        return gender;
+    }
 }

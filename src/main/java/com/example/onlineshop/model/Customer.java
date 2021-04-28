@@ -19,8 +19,7 @@ public class Customer extends Person{
     @Column(name = "shippingAddress")
     private String shippingAddress;
 
-    @ManyToOne
-    @JoinColumn(name = "gender_id")
+    @Enumerated
     private Gender gender;
 
     public LocalDate getBirthDate() {

@@ -1,10 +1,8 @@
 package com.example.onlineshop.controller;
 
 import com.example.onlineshop.model.Customer;
-import com.example.onlineshop.model.Gender;
 import com.example.onlineshop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -46,7 +44,7 @@ public class CustomerController {
                                @RequestParam(required = false) String lastName,
                                @RequestParam(required = false) LocalDate birthDate,
                                @RequestParam(required = false) String shippingAddress,
-                               @RequestParam(required = false) Gender gender){
+                               @RequestParam(required = false) String gender){
         this.customerService.updateCustomer(id,firstName,lastName,birthDate,shippingAddress,gender);
     }
 }

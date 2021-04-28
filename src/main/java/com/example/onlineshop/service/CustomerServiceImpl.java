@@ -43,7 +43,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Transactional
     public void updateCustomer(Long customerId, String firstName, String lastName,
-                               LocalDate birthDate, String shippingAddress, Gender gender) {
+                               LocalDate birthDate, String shippingAddress, String gender) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
         if (isStringCorrect(firstName) && !Objects.equals(customer.getFirstName(),firstName)){
@@ -52,14 +52,14 @@ public class CustomerServiceImpl implements CustomerService{
         if (isStringCorrect(lastName) && !Objects.equals(customer.getLastName(),lastName)){
             customer.setLastName(lastName);
         }
-        if (LocalDate.now().isAfter(birthDate)){
+        if (birthDate != null && LocalDate.now().isAfter(birthDate)){
             customer.setBirthDate(birthDate);
         }
         if (isStringCorrect(shippingAddress) && !Objects.equals(customer.getShippingAddress(),shippingAddress)){
             customer.setShippingAddress(shippingAddress);
         }
-        if (gender.isNew()){
-            customer.setGender(gender);
+        if (isStringCorrect(gender) && !customer.getGender().isSame(gender)){
+            customer.setGender(Gender.valueOf(gender));
         }
     }
 
