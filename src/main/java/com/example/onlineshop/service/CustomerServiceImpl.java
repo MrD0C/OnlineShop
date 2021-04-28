@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -22,16 +23,22 @@ public class CustomerServiceImpl implements CustomerService{
         this.customerRepository = customerRepository;
     }
 
+    @Transactional
     public Customer saveCustomer(Customer customer){
         return this.customerRepository.save(customer);
     }
 
+    @Transactional(readOnly = true)
     public Customer findCustomerById(Long customerId){
         Optional<Customer> customer = customerRepository.findById(customerId);
         if (customer.isEmpty()){
             throw new CustomerNotFoundException(customerId);
         }
         return customer.get();
+    }
+
+    public Collection<Customer> getAllCustomers(){
+        return customerRepository.findAll();
     }
 
     @Transactional
@@ -60,6 +67,7 @@ public class CustomerServiceImpl implements CustomerService{
         return string != null && string.length() > 0;
     }
 
+    @Transactional
     public void deleteCustomerById(Long customerId){
         Optional<Customer> customer = customerRepository.findById(customerId);
         if (customer.isEmpty()){
