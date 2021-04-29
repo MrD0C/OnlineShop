@@ -41,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService{
         return customerRepository.findAll();
     }
 
+    //TODO change input to class Customer
     @Transactional
     public void updateCustomer(Long customerId, String firstName, String lastName,
                                LocalDate birthDate, String shippingAddress, String gender) {

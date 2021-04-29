@@ -4,19 +4,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "customers")
 public class Customer extends Person{
 
-    @NotEmpty
+    @NotNull(message = "Date of Birthday is mandatory")
     @Column(name = "birthDate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
-    @NotEmpty
+    @NotEmpty(message = "Address can not be empty")
     @Column(name = "shippingAddress")
+    @Pattern(regexp = "^(ул.)[А-Я][а-я|\\s]*(,д.)[1-9]{1,3}(,кв.)[1-9]{1,3}$",
+    message = "Address must be like this - ул.{text},д.{number},кв.{number}")
     private String shippingAddress;
 
     @Enumerated
