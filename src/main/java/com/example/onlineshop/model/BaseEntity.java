@@ -24,7 +24,7 @@ public class BaseEntity implements Serializable {
     }
 
     @JsonIgnore
-    public boolean isNew(){
+    public boolean isNew() {
         return this.id == null;
     }
 }

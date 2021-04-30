@@ -10,7 +10,7 @@ public enum Gender {
         this.gender = gender;
     }
 
-    public boolean isSame(String gender){
+    public boolean isSame(String gender) {
         return this.gender.equals(gender);
     }
 

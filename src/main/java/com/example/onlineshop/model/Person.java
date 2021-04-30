@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 @MappedSuperclass
-public class Person extends BaseEntity{
+public class Person extends BaseEntity {
 
     @NotEmpty(message = "First name is mandatory")
     @Column(name = "firstName")
