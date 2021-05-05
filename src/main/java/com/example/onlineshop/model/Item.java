@@ -9,6 +9,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "items")
@@ -17,7 +18,7 @@ public class Item extends NamedEntity{
     @NotEmpty(message = "Manufacturer is mandatory")
     @Column(name = "manufacturer",nullable = false)
     private String manufacturer;
-    
+
     @NotEmpty(message = "Vendor code is mandatory")
     @Column(name = "vendor_code",nullable = false)
     private String vendorCode;
@@ -49,5 +50,18 @@ public class Item extends NamedEntity{
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(manufacturer, item.manufacturer) && Objects.equals(vendorCode, item.vendorCode) && Objects.equals(price, item.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(manufacturer, vendorCode, price);
     }
 }

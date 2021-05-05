@@ -22,6 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @Override
     @Transactional
     public Customer saveCustomer(Customer customer) {
         Example<Customer> customerExample = Example.of(customer);
@@ -31,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
         return this.customerRepository.save(customer);
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Customer findCustomerById(Long customerId) {
         Optional<Customer> customer = this.customerRepository.findById(customerId);
@@ -40,11 +42,13 @@ public class CustomerServiceImpl implements CustomerService {
         return customer.get();
     }
 
+    @Override
     @Transactional(readOnly = true)
     public Collection<Customer> findAllCustomers() {
         return this.customerRepository.findAll();
     }
 
+    @Override
     @Transactional
     public void updateCustomer(Long customerId, Customer updatedCustomer) {
         Customer customer = this.customerRepository.findById(customerId)
@@ -59,6 +63,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setBirthDate(updatedCustomer.getBirthDate());
     }
 
+    @Override
     @Transactional
     public void deleteCustomerById(Long customerId) {
         Optional<Customer> customer = this.customerRepository.findById(customerId);

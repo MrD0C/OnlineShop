@@ -1,10 +1,11 @@
 package com.example.onlineshop.service;
 
 import com.example.onlineshop.model.Customer;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-
+@Service
 public interface CustomerService {
 
     Customer saveCustomer(Customer customer);
