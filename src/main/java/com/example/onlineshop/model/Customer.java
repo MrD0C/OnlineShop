@@ -3,6 +3,7 @@ package com.example.onlineshop.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -19,7 +20,7 @@ public class Customer extends Person {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
-    @NotEmpty(message = "Address can not be empty")
+    @NotBlank(message = "Address can not be empty")
     @Column(name = "shippingAddress")
     @Pattern(regexp = "^(ул.)[А-Я][а-я|\\s]*(,д.)[1-9]{1,3}(,кв.)[1-9]{1,3}$",
             message = "Address must be like this - ул.{text},д.{number},кв.{number}")

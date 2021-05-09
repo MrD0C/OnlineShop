@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -15,11 +16,11 @@ import java.util.Objects;
 @Table(name = "items")
 public class Item extends NamedEntity{
 
-    @NotEmpty(message = "Manufacturer is mandatory")
+    @NotBlank(message = "Manufacturer is mandatory")
     @Column(name = "manufacturer",nullable = false)
     private String manufacturer;
 
-    @NotEmpty(message = "Vendor code is mandatory")
+    @NotBlank(message = "Vendor code is mandatory")
     @Column(name = "vendor_code",nullable = false)
     private String vendorCode;
 

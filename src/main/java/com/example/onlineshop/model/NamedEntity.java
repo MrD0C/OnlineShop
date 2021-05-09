@@ -2,11 +2,13 @@ package com.example.onlineshop.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
 public class NamedEntity extends BaseEntity {
 
-    @Column(name = "name")
+    @NotBlank
+    @Column(name = "name",nullable = false)
     private String name;
 
     public String getName() {
