@@ -1,4 +1,4 @@
-package com.example.onlineshop.service;
+package com.example.onlineshop.service.customer;
 
 import com.example.onlineshop.model.Customer;
 import org.springframework.stereotype.Service;

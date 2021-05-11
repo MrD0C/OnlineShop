@@ -1,9 +1,7 @@
 package com.example.onlineshop.service;
 
-import com.example.onlineshop.exception.customer.CustomerNotFoundException;
 import com.example.onlineshop.exception.item.ItemAlreadyExistException;
 import com.example.onlineshop.exception.item.ItemNotFoundException;
-import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Item;
 import com.example.onlineshop.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +38,6 @@ public class ItemServiceImpl implements ItemService{
         return this.itemRepository.save(item);
     }
 
-    //TODO сделать рефакторинг кода
     @Override
     @Transactional
     public void updateItem(Long id, Item updatedItem) {
