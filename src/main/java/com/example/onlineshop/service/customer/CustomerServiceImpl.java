@@ -34,9 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public Customer findCustomerById(Long customerId) {
-        return this.customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + customerId + "] not found"));
+    public Customer findCustomerById(Long id) {
+        return this.customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + id + "] not found"));
     }
 
     @Override
@@ -50,9 +50,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(Long customerId, Customer updatedCustomer) {
-        Customer customer = this.customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + customerId + "] not found"));
+    public void updateCustomer(Long id, Customer updatedCustomer) {
+        Customer customer = this.customerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + id + "] not found"));
         if (customer.equals(updatedCustomer)) {
             return;
         }
@@ -66,10 +66,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public void deleteCustomerById(Long customerId) {
-        Optional<Customer> customer = this.customerRepository.findById(customerId);
+    public void deleteCustomerById(Long id) {
+        Optional<Customer> customer = this.customerRepository.findById(id);
         if (customer.isEmpty()) {
-            throw new ResourceNotFoundException("Customer with id [" + customerId + "] not found");
+            throw new ResourceNotFoundException("Customer with id [" + id + "] not found");
         }
         this.customerRepository.delete(customer.get());
     }

@@ -4,7 +4,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
@@ -26,8 +25,8 @@ public class Customer extends Person {
             message = "Address must be like this - ул.{text},д.{number},кв.{number}")
     private String shippingAddress;
 
-    @Enumerated
     @NotNull
+    @Enumerated
     private Gender gender;
 
     public LocalDate getBirthDate() {
