@@ -37,7 +37,7 @@ public class CustomerController {
         return new ResponseEntity<>(foundedCustomer, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomerById(@Min(value = 1, message = "ID must be equal or greater than 1")
                                                        @PathVariable Long id) {
         this.customerService.deleteCustomerById(id);
@@ -50,7 +50,7 @@ public class CustomerController {
         return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}/update")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateCustomer(@Min(value = 1, message = "ID must be equal or greater than 1")
                                                    @PathVariable Long id,
                                                    @Valid @RequestBody Customer customer) {

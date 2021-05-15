@@ -11,7 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "customers",
-        uniqueConstraints = {@UniqueConstraint(columnNames = {"firstName","lastName","birthDate"})})
+        uniqueConstraints = @UniqueConstraint(columnNames = {"firstName","lastName","birthDate"}))
 public class Customer extends Person {
 
     @NotNull(message = "Date of Birthday is mandatory")

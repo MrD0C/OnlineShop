@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import java.util.Collection;
@@ -45,15 +44,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateCustomer(Long id, Customer updatedCustomer) {
         Customer customer = findCustomerById(id);
-        if (customer.equals(updatedCustomer)) {
-            return;
+        if (!customer.equals(updatedCustomer)) {
+            customer.setLastName(updatedCustomer.getLastName());
+            customer.setFirstName(updatedCustomer.getFirstName());
+            customer.setGender(updatedCustomer.getGender());
+            customer.setShippingAddress(updatedCustomer.getShippingAddress());
+            customer.setBirthDate(updatedCustomer.getBirthDate());
+            this.customerRepository.save(customer);
         }
-        customer.setLastName(updatedCustomer.getLastName());
-        customer.setFirstName(updatedCustomer.getFirstName());
-        customer.setGender(updatedCustomer.getGender());
-        customer.setShippingAddress(updatedCustomer.getShippingAddress());
-        customer.setBirthDate(updatedCustomer.getBirthDate());
-        this.customerRepository.save(customer);
     }
 
     @Override

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import java.util.Collection;
@@ -22,14 +21,12 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Item findItem(Long id) {
         return this.itemRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("Item with id [" + id + "] not found"));
     }
 
     @Override
-    @Transactional
     public Item saveItem(Item item) {
         Example<Item> itemExample = Example.of(item);
         if (this.itemRepository.exists(itemExample)){
@@ -40,7 +37,6 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    @Transactional
     public void updateItem(Long id, Item updatedItem) {
         Item item = findItem(id);
         if (!item.equals(updatedItem)){
@@ -48,19 +44,17 @@ public class ItemServiceImpl implements ItemService{
             item.setManufacturer(updatedItem.getManufacturer());
             item.setPrice(updatedItem.getPrice());
             item.setVendorCode(updatedItem.getVendorCode());
+            this.itemRepository.save(item);
         }
     }
 
     @Override
-    @Transactional
     public void deleteItem(Long id) {
-        Item item = this.itemRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Item with id [" + id + "] not found"));
+        Item item = findItem(id);
         this.itemRepository.delete(item);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Item> findAllItems() {
         return this.itemRepository.findAll();
     }
