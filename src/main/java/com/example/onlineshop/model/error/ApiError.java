@@ -1,9 +1,9 @@
 package com.example.onlineshop.model.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,12 +25,28 @@ public class ApiError {
         this.debugMessage = "";
     }
 
-    public ApiError(HttpStatus status,String message,Throwable ex){
+    public ApiError(HttpStatus status, String message) {
         this();
         this.httpStatus = status;
         this.message = message;
+    }
+
+    public ApiError(HttpStatus status,String message,Throwable ex){
+        this(status,message);
         this.debugMessage = ex.getLocalizedMessage();
     }
 
+    public void addValidationErrors(List<FieldError> list){
+        list.forEach(this::addValidationError);
+    }
 
+    private void addValidationError(FieldError fieldError){
+        ApiValidationError validationError = ApiValidationError.builder()
+                .field(fieldError.getField())
+                .object(fieldError.getObjectName())
+                .rejectedValue(fieldError.getRejectedValue())
+                .message(fieldError.getDefaultMessage())
+                .build();
+        this.apiSubErrors.add(validationError);
+    }
 }

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityExistsException;
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -33,26 +32,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Customer findCustomerById(Long id) {
         return this.customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + id + "] not found"));
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Collection<Customer> findAllCustomers() {
-        Collection<Customer> collection = this.customerRepository.findAll();
-        if (collection.isEmpty()){
-            throw new ResourceNotFoundException("Customer collection is empty");
-        }
-        return collection;
+        return this.customerRepository.findAll();
     }
 
     @Override
     public void updateCustomer(Long id, Customer updatedCustomer) {
-        Customer customer = this.customerRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + id + "] not found"));
+        Customer customer = findCustomerById(id);
         if (customer.equals(updatedCustomer)) {
             return;
         }
@@ -65,13 +57,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
     public void deleteCustomerById(Long id) {
-        Optional<Customer> customer = this.customerRepository.findById(id);
-        if (customer.isEmpty()) {
-            throw new ResourceNotFoundException("Customer with id [" + id + "] not found");
-        }
-        this.customerRepository.delete(customer.get());
+        Customer customer = findCustomerById(id);
+        this.customerRepository.delete(customer);
     }
 
 }
