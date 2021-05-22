@@ -16,7 +16,7 @@ public class Customer extends Person {
 
     @NotNull(message = "Date of Birthday is mandatory")
     @Column(name = "birthDate")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
     @NotBlank(message = "Address can not be empty")

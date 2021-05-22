@@ -10,6 +10,8 @@ public class OnlineshopApplication {
     //TODO добавить логгер
     //TODO закончить Item
     //TODO создать класс Address
+    //todo отловить ошибку сериализации даты
+    //TODO сделать общий класс для построения ответа ошкибки?
     public static void main(String[] args) {
         SpringApplication.run(OnlineshopApplication.class, args);
     }

@@ -10,12 +10,12 @@ public class Person extends BaseEntity {
 
     @NotBlank(message = "First name is mandatory")
     @Column(name = "firstName")
-    @Pattern(regexp = "^[А-Я][а-я]+$")
+    @Pattern(regexp = "^[А-Я][а-я]+$",message = "The first name must only consist of Cyrillic letters")
     private String firstName;
 
     @NotBlank(message = "Last name is mandatory")
     @Column(name = "lastName")
-    @Pattern(regexp = "^[А-Я][а-я]+$")
+    @Pattern(regexp = "^[А-Я][а-я]+$",message = "The first name must only consist of Cyrillic letters")
     private String lastName;
 
     public String getFirstName() {

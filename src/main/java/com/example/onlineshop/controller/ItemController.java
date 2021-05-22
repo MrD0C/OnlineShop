@@ -1,6 +1,5 @@
 package com.example.onlineshop.controller;
 
-import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.model.Item;
 import com.example.onlineshop.service.item.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

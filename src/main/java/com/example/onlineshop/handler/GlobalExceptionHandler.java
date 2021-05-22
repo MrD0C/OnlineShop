@@ -1,9 +1,11 @@
 package com.example.onlineshop.handler;
 
 import com.example.onlineshop.model.error.ApiError;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,6 +38,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = RollbackException.class)
     public ResponseEntity<Object> handleRollBackException(){
         ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,"Could not commit transaction");
+        return buildResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(value = HttpMessageNotReadableException.class)
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
+        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST,"Http message not readable");
+        final Throwable throwable = ex.getCause();
+        if (throwable instanceof InvalidFormatException){
+            apiError.addValidationError((InvalidFormatException) ex.getCause());
+        }
         return buildResponseEntity(apiError);
     }
 
