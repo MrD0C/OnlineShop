@@ -1,6 +1,7 @@
 package com.example.onlineshop.controller;
 
 import com.example.onlineshop.model.Customer;
+import com.example.onlineshop.model.Transaction;
 import com.example.onlineshop.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import java.math.BigDecimal;
 import java.util.Collection;
 
 @Validated
@@ -56,5 +58,19 @@ public class CustomerController {
                                                    @Valid @RequestBody Customer customer) {
         this.customerService.updateCustomer(id, customer);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/transactions/{amount}")
+    public ResponseEntity<Void> doTransaction(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                              @PathVariable Long id, @PathVariable BigDecimal amount){
+        this.customerService.doTransaction(id,amount);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/transactions")
+    public ResponseEntity<Collection<Transaction>> getCustomerTransactions(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                                                           @PathVariable Long id){
+        Collection<Transaction> transactionCollection = this.customerService.getCustomerTransactions(id);
+        return new ResponseEntity<>(transactionCollection,HttpStatus.OK);
     }
 }

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -24,6 +25,8 @@ public class Customer extends Person {
     @Pattern(regexp = "^(ул.)[А-Я][а-я|\\s]*(,д.)[1-9]{1,3}(,кв.)[1-9]{1,3}$",
             message = "Address must be like this - ул.{text},д.{number},кв.{number}")
     private String shippingAddress;
+
+    private BigDecimal balance = BigDecimal.ZERO;
 
     @NotNull
     @Enumerated
@@ -51,6 +54,14 @@ public class Customer extends Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     @Override
