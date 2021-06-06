@@ -23,7 +23,7 @@ public final class Transaction{
     private TransactionType transactionType;
     @Column(name = "transaction_date",nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime transactionDate = LocalDateTime.now();
+    private final LocalDateTime transactionDate = LocalDateTime.now();
     @JsonIgnore
     @Column(name = "customer_id",nullable = false)
     private Long customerId;
@@ -32,34 +32,6 @@ public final class Transaction{
         this.amount = amount;
         this.transactionType = transactionType;
         this.customerId = customerId;
-    }
-
-    public UUID getTransactionCode() {
-        return transactionCode;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public LocalDateTime getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
-    }
-
-    public void setTransactionDate(LocalDateTime transactionDate) {
-        this.transactionDate = transactionDate;
     }
 
     @Override
