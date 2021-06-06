@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Collection;
 
-@Service
 public interface TransactionService {
 
     Collection<Transaction> getCustomerTransactions(Long id);

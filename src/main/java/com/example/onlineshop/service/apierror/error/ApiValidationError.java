@@ -1,4 +1,4 @@
-package com.example.onlineshop.model.error;
+package com.example.onlineshop.service.apierror.error;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
