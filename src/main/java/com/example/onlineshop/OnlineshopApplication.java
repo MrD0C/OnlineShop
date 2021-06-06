@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnlineshopApplication {
 
     //TODO добавить логгер
-    //TODO создать класс Address
+    //TODO создать класс Address №1!!
     //todo добавить order
     public static void main(String[] args) {
         SpringApplication.run(OnlineshopApplication.class, args);
