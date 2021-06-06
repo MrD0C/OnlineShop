@@ -8,7 +8,6 @@ public class OnlineshopApplication {
 
     //TODO добавить логгер
     //TODO создать класс Address
-    //TODO починить скрипты создания БД
     //todo добавить order
     public static void main(String[] args) {
         SpringApplication.run(OnlineshopApplication.class, args);
