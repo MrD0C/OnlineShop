@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OnlineshopApplication {
 
     //TODO добавить логгер (долгий ящик)
-    //todo добавить order 
-    //TODO добавить DTO
+    //todo добавить order
     public static void main(String[] args) {
         SpringApplication.run(OnlineshopApplication.class, args);
     }
