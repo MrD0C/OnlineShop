@@ -53,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setLastName(updatedCustomer.getLastName());
             customer.setFirstName(updatedCustomer.getFirstName());
             customer.setGender(updatedCustomer.getGender());
-            customer.setShippingAddress(updatedCustomer.getShippingAddress());
+            customer.setAddress(updatedCustomer.getAddress());
             customer.setBirthDate(updatedCustomer.getBirthDate());
             this.customerRepository.save(customer);
         }

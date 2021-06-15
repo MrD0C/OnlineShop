@@ -1,0 +1,1 @@
+INSERT INTO COUNTRIES VALUES (1,'RU','RUS','Russian Federation',643);

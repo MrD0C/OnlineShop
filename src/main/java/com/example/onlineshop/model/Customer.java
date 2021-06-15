@@ -20,11 +20,14 @@ public class Customer extends Person {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
-    @NotBlank(message = "Address can not be empty")
-    @Column(name = "shippingAddress")
-    @Pattern(regexp = "^(ул.)[А-Я][а-я|\\s]*(,д.)[1-9]{1,3}(,кв.)[1-9]{1,3}$",
-            message = "Address must be like this - ул.{text},д.{number},кв.{number}")
-    private String shippingAddress;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "city",column = @Column(name = "address_city")),
+            @AttributeOverride(name = "street",column = @Column(name = "address_street")),
+            @AttributeOverride(name = "houseNumber",column = @Column(name = "address_house_number")),
+            @AttributeOverride(name = "flat",column = @Column(name = "address_flat"))
+    })
+    private Address address;
 
     private BigDecimal balance = BigDecimal.ZERO;
 
@@ -38,14 +41,6 @@ public class Customer extends Person {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
     }
 
     public Gender getGender() {
@@ -64,16 +59,24 @@ public class Customer extends Person {
         this.balance = balance;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return birthDate.equals(customer.birthDate) && Objects.equals(shippingAddress, customer.shippingAddress) && gender == customer.gender;
+        return Objects.equals(birthDate, customer.birthDate) && Objects.equals(address, customer.address) && Objects.equals(balance, customer.balance) && gender == customer.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(birthDate, shippingAddress, gender);
+        return Objects.hash(birthDate, address, balance, gender);
     }
 }

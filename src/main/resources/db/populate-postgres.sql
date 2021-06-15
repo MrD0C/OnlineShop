@@ -1,5 +1,4 @@
-INSERT INTO CUSTOMERS VALUES (1,'Даниил','Кудияров',0.00,'2000-07-05',0,'ул.Московское шоссе,д.25,кв.20');
-INSERT INTO CUSTOMERS VALUES (2,'Иван','Иванов',0.00,'1999-04-20',0,'ул.Зубчаниновское шоссе,д.25,кв.1');
+INSERT INTO CUSTOMERS VALUES (1,'Дима','Золотухин','Самара','28','140','Стара-Загора',0.00,'1999-04-20',0,1);
 
 INSERT INTO ITEMS VALUES (1,'PS5 DE','Playstation',37999.00,'23495043');
 INSERT INTO ITEMS VALUES (2,'PS5','Playstation',46999.00,'9437385');
