@@ -1,7 +1,7 @@
 package com.example.onlineshop.controller;
 
 import com.example.onlineshop.model.Customer;
-import com.example.onlineshop.model.Transaction;
+import com.example.onlineshop.model.transaction.Transaction;
 import com.example.onlineshop.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package com.example.onlineshop.model;
+package com.example.onlineshop.model.transaction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

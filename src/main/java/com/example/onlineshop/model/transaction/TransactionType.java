@@ -1,4 +1,4 @@
-package com.example.onlineshop.model;
+package com.example.onlineshop.model.transaction;
 
 public enum TransactionType {
     DEPOSIT("Пополнение"),

@@ -1,5 +1,7 @@
 package com.example.onlineshop.model;
 
+import com.example.onlineshop.model.domain.BaseEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

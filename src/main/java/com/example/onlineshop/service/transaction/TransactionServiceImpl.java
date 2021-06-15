@@ -1,7 +1,7 @@
 package com.example.onlineshop.service.transaction;
 
-import com.example.onlineshop.model.Transaction;
-import com.example.onlineshop.model.TransactionType;
+import com.example.onlineshop.model.transaction.Transaction;
+import com.example.onlineshop.model.transaction.TransactionType;
 import com.example.onlineshop.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 

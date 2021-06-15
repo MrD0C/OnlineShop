@@ -1,6 +1,6 @@
 package com.example.onlineshop.repository;
 
-import com.example.onlineshop.model.Transaction;
+import com.example.onlineshop.model.transaction.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;

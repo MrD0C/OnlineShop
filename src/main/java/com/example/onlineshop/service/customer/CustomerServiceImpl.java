@@ -1,7 +1,7 @@
 package com.example.onlineshop.service.customer;
 
 import com.example.onlineshop.model.Customer;
-import com.example.onlineshop.model.Transaction;
+import com.example.onlineshop.model.transaction.Transaction;
 import com.example.onlineshop.repository.CustomerRepository;
 import com.example.onlineshop.service.transaction.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;

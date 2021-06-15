@@ -1,11 +1,10 @@
 package com.example.onlineshop.model;
 
+import com.example.onlineshop.model.domain.Person;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;

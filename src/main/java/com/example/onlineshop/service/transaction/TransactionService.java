@@ -1,7 +1,6 @@
 package com.example.onlineshop.service.transaction;
 
-import com.example.onlineshop.model.Transaction;
-import org.springframework.stereotype.Service;
+import com.example.onlineshop.model.transaction.Transaction;
 
 import java.math.BigDecimal;
 import java.util.Collection;

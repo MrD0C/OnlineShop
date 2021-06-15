@@ -1,5 +1,7 @@
 package com.example.onlineshop.model;
 
+import com.example.onlineshop.model.domain.NamedEntity;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -13,7 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "items",
        uniqueConstraints = @UniqueConstraint(columnNames = {"name","manufacturer","vendor_code"}))
-public class Item extends NamedEntity{
+public class Item extends NamedEntity {
 
     @NotBlank(message = "Manufacturer is mandatory")
     @Column(name = "manufacturer",nullable = false)

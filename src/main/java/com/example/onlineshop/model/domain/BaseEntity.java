@@ -1,4 +1,4 @@
-package com.example.onlineshop.model;
+package com.example.onlineshop.model.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
