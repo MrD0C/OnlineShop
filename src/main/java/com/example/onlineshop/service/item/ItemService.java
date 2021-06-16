@@ -1,7 +1,6 @@
 package com.example.onlineshop.service.item;
 
 import com.example.onlineshop.model.Item;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 

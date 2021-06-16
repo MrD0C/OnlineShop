@@ -1,6 +1,6 @@
 package com.example.onlineshop.handler;
 
-import com.example.onlineshop.service.apierror.error.ApiError;
+import com.example.onlineshop.server.apierror.ApiError;
 import com.example.onlineshop.service.apierror.ApiErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -24,36 +24,36 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex){
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = EntityExistsException.class)
-    public ResponseEntity<Object> handleEntityExistsException(EntityExistsException ex){
+    public ResponseEntity<Object> handleEntityExistsException(EntityExistsException ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex){
+    public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = RollbackException.class)
-    public ResponseEntity<Object> handleRollBackException(RollbackException ex){
+    public ResponseEntity<Object> handleRollBackException(RollbackException ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
-    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex){
+    public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<Object> handleGlobalException(Exception ex){
+    public ResponseEntity<Object> handleGlobalException(Exception ex) {
         return buildResponseEntity(apiErrorService.getApiError(ex));
     }
 
-    private ResponseEntity<Object> buildResponseEntity(ApiError error){
-        return new ResponseEntity<>(error,error.getHttpStatus());
+    private ResponseEntity<Object> buildResponseEntity(ApiError error) {
+        return new ResponseEntity<>(error, error.getHttpStatus());
     }
 }

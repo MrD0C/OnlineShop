@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+//Todo связать customer и transaction через связь Many-To-One
+//Todo добавить equals и hashCode
 @Entity
 @Table(name = "transactions")
 @NoArgsConstructor

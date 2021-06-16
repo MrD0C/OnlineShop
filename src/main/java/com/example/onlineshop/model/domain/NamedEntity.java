@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class NamedEntity extends BaseEntity {
 
     @NotBlank
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     public String getName() {
@@ -19,10 +19,4 @@ public class NamedEntity extends BaseEntity {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "NamedEntity{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 }

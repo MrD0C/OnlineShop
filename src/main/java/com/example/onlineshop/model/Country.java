@@ -1,6 +1,7 @@
 package com.example.onlineshop.model;
 
 import com.example.onlineshop.model.domain.BaseEntity;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,51 +9,21 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
+//Todo переделать toString
+@Data
 @Entity
 @Table(name = "countries",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"name","alpha2Code","alpha3Code","numeric"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "alpha2Code", "alpha3Code", "numeric"}))
 public final class Country extends BaseEntity {
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "alpha2Code",nullable = false)
+    @Column(name = "alpha2Code", nullable = false)
     private String alpha2Code;
-    @Column(name = "alpha3Code",nullable = false)
+    @Column(name = "alpha3Code", nullable = false)
     private String alpha3Code;
-    @Column(name = "numeric",nullable = false)
+    @Column(name = "numeric", nullable = false)
     private String numeric;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAlpha2Code() {
-        return alpha2Code;
-    }
-
-    public void setAlpha2Code(String alpha2Code) {
-        this.alpha2Code = alpha2Code;
-    }
-
-    public String getAlpha3Code() {
-        return alpha3Code;
-    }
-
-    public void setAlpha3Code(String alpha3Code) {
-        this.alpha3Code = alpha3Code;
-    }
-
-    public String getNumeric() {
-        return numeric;
-    }
-
-    public void setNumeric(String numeric) {
-        this.numeric = numeric;
-    }
 
     @Override
     public boolean equals(Object o) {

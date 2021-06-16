@@ -1,4 +1,4 @@
-package com.example.onlineshop.service.apierror.error;
+package com.example.onlineshop.server.apierror;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -14,7 +14,7 @@ public class ApiError {
 
     private HttpStatus httpStatus;
     private String message;
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy hh:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp;
     private String debugMessage;
     private List<ApiSubError> apiSubErrors;

@@ -1,6 +1,7 @@
 package com.example.onlineshop.model;
 
 import com.example.onlineshop.model.domain.NamedEntity;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,47 +13,25 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+//Todo создать toString
+@Data
 @Entity
 @Table(name = "items",
-       uniqueConstraints = @UniqueConstraint(columnNames = {"name","manufacturer","vendor_code"}))
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "manufacturer", "vendor_code"}))
 public class Item extends NamedEntity {
 
     @NotBlank(message = "Manufacturer is mandatory")
-    @Column(name = "manufacturer",nullable = false)
+    @Column(name = "manufacturer", nullable = false)
     private String manufacturer;
 
     @NotBlank(message = "Vendor code is mandatory")
-    @Column(name = "vendor_code",nullable = false)
+    @Column(name = "vendor_code", nullable = false)
     private String vendorCode;
 
     @NotNull
     @DecimalMin(value = "0.0")
-    @Column(name = "price",nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getVendorCode() {
-        return vendorCode;
-    }
-
-    public void setVendorCode(String vendorCode) {
-        this.vendorCode = vendorCode;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     @Override
     public boolean equals(Object o) {

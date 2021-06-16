@@ -1,7 +1,7 @@
 package com.example.onlineshop.service.apierror;
 
-import com.example.onlineshop.service.apierror.error.ApiSubError;
-import com.example.onlineshop.service.apierror.error.ApiValidationError;
+import com.example.onlineshop.server.apierror.ApiSubError;
+import com.example.onlineshop.server.apierror.ApiValidationError;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.FieldError;
 

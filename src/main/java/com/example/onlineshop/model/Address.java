@@ -1,11 +1,16 @@
 package com.example.onlineshop.model;
 
+import lombok.Data;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
+//Todo добавить проверки для полей
+//Todo переделать toString
+@Data
 @Embeddable
 public class Address {
 
@@ -17,48 +22,8 @@ public class Address {
     private String houseNumber;
     private String flat = "";
     @ManyToOne
-    @JoinColumn(name = "country_id",nullable = false)
+    @JoinColumn(name = "country_id", nullable = false)
     private Country country;
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public String getFlat() {
-        return flat;
-    }
-
-    public void setFlat(String flat) {
-        this.flat = flat;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
 
     @Override
     public boolean equals(Object o) {

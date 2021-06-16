@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
     Country getByAlpha2Code(String alpha2Code);
+
     Country getByAlpha3Code(String alpha3Code);
 }
