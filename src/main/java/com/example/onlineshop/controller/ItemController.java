@@ -15,7 +15,7 @@ import java.util.Collection;
 @Validated
 @RestController
 @RequestMapping("api/v1/items")
-public class ItemController {
+public class ItemController implements IRestController<Item, Long> {
 
     private final ItemService itemService;
 
@@ -25,36 +25,36 @@ public class ItemController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Collection<Item>> getAllItems(){
-        Collection<Item> collection = this.itemService.findAllItems();
-        return new ResponseEntity<>(collection, HttpStatus.OK);
+    public ResponseEntity<Collection<Item>> findAll() {
+        Collection<Item> itemCollection = this.itemService.findAllItems();
+        return new ResponseEntity<>(itemCollection, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Item> findItemById(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                             @PathVariable Long id){
+    public ResponseEntity<Item> findById(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                         @PathVariable Long id) {
         Item item = this.itemService.findItem(id);
-        return new ResponseEntity<>(item,HttpStatus.OK);
+        return new ResponseEntity<>(item, HttpStatus.FOUND);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Item> saveItem(@Valid @RequestBody Item item){
+    public ResponseEntity<Item> save(@Valid @RequestBody Item item) {
         Item savedItem = this.itemService.saveItem(item);
-        return new ResponseEntity<>(savedItem,HttpStatus.CREATED);
+        return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteItemById(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                               @PathVariable Long id){
+    public ResponseEntity<Void> deleteById(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                           @PathVariable Long id) {
         this.itemService.deleteItem(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateItem(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                           @PathVariable Long id,
-                                           @Valid @RequestBody Item item){
-        this.itemService.updateItem(id,item);
+    public ResponseEntity<Void> update(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                       @PathVariable Long id,
+                                       @Valid @RequestBody Item item) {
+        this.itemService.updateItem(id, item);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
