@@ -1,7 +1,7 @@
 package com.example.onlineshop.controller;
 
 import com.example.onlineshop.model.Item;
-import com.example.onlineshop.service.item.ItemService;
+import com.example.onlineshop.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,44 +17,40 @@ import java.util.Collection;
 @RequestMapping("api/v1/items")
 public class ItemController implements IRestController<Item, Long> {
 
-    private final ItemService itemService;
+    private final IService<Item, Long> service;
 
     @Autowired
-    public ItemController(ItemService itemService) {
-        this.itemService = itemService;
+    public ItemController(IService<Item, Long> service) {
+        this.service = service;
     }
 
-    @GetMapping("/all")
+    @Override
     public ResponseEntity<Collection<Item>> findAll() {
-        Collection<Item> itemCollection = this.itemService.findAllItems();
+        Collection<Item> itemCollection = this.service.findAll();
         return new ResponseEntity<>(itemCollection, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Item> findById(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                         @PathVariable Long id) {
-        Item item = this.itemService.findItem(id);
+    @Override
+    public ResponseEntity<Item> findById(Long id) {
+        Item item = this.service.findById(id);
         return new ResponseEntity<>(item, HttpStatus.FOUND);
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Item> save(@Valid @RequestBody Item item) {
-        Item savedItem = this.itemService.saveItem(item);
+    @Override
+    public ResponseEntity<Item> save(Item item) {
+        Item savedItem = this.service.save(item);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                           @PathVariable Long id) {
-        this.itemService.deleteItem(id);
+    @Override
+    public ResponseEntity<Void> update(Long id, Item item) {
+        this.service.update(id, item);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                       @PathVariable Long id,
-                                       @Valid @RequestBody Item item) {
-        this.itemService.updateItem(id, item);
+    @Override
+    public ResponseEntity<Void> deleteById(Long id) {
+        this.service.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

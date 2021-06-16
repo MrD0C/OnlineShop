@@ -18,17 +18,17 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Collection<Transaction> getCustomerTransactions(Long customerId) {
+    public Collection<Transaction> getTransactionsByCustomerId(Long customerId) {
         return this.transactionRepository.getAllByCustomerId(customerId);
     }
 
     @Override
     public void doTransactionDeposit(Long customerId, BigDecimal amount) {
-        this.transactionRepository.save(new Transaction(amount,TransactionType.DEPOSIT,customerId));
+        this.transactionRepository.save(new Transaction(amount, TransactionType.DEPOSIT, customerId));
     }
 
     @Override
     public void doTransactionOnline(Long customerId, BigDecimal amount) {
-        this.transactionRepository.save(new Transaction(amount,TransactionType.ONLINE,customerId));
+        this.transactionRepository.save(new Transaction(amount, TransactionType.ONLINE, customerId));
     }
 }

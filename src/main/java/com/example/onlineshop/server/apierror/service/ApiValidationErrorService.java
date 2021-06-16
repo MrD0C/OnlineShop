@@ -1,4 +1,4 @@
-package com.example.onlineshop.service.apierror;
+package com.example.onlineshop.server.apierror.service;
 
 import com.example.onlineshop.server.apierror.ApiSubError;
 import com.example.onlineshop.server.apierror.ApiValidationError;
@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import java.util.ArrayList;
 import java.util.List;
 
+//Todo добавить обработку Constraint
 @Service
 class ApiValidationErrorService {
 

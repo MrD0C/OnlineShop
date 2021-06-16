@@ -1,7 +1,7 @@
-package com.example.onlineshop.handler;
+package com.example.onlineshop.server.handler;
 
 import com.example.onlineshop.server.apierror.ApiError;
-import com.example.onlineshop.service.apierror.ApiErrorService;
+import com.example.onlineshop.server.apierror.service.ApiErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;

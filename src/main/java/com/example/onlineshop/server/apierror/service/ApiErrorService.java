@@ -1,4 +1,4 @@
-package com.example.onlineshop.service.apierror;
+package com.example.onlineshop.server.apierror.service;
 
 import com.example.onlineshop.server.apierror.ApiError;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class ApiErrorService {
     public ApiError getApiError(MethodArgumentNotValidException exception){
         return ApiError.builder()
                 .httpStatus(HttpStatus.CONFLICT)
-                .message("Entity already exist")
+                .message("Validation failed")
                 .debugMessage(exception.getLocalizedMessage())
                 .apiSubErrors(this.validationErrorService.addValidationErrors(exception.getFieldErrors()))
                 .timestamp(LocalDateTime.now())

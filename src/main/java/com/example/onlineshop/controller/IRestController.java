@@ -1,18 +1,31 @@
 package com.example.onlineshop.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.Collection;
 
-public interface IRestController<T, K> {
+@Validated
+public interface IRestController<T, K extends Number> {
 
+    @GetMapping("/all")
     ResponseEntity<Collection<T>> findAll();
 
-    ResponseEntity<T> findById(K id);
+    @GetMapping("/{id}")
+    ResponseEntity<T> findById(@Min(value = 1, message = "ID must be equal or greater than 1")
+                               @PathVariable K id);
 
-    ResponseEntity<Void> deleteById(K id);
+    @PostMapping("/save")
+    ResponseEntity<T> save(@Valid @RequestBody T entity);
 
-    ResponseEntity<T> save(T entity);
+    @PutMapping("/{id}")
+    ResponseEntity<Void> update(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                @PathVariable K id, @Valid @RequestBody T entity);
 
-    ResponseEntity<Void> update(K id, T entity);
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> deleteById(@Min(value = 1, message = "ID must be equal or greater than 1")
+                                    @PathVariable K id);
 }

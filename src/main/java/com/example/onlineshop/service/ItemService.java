@@ -1,4 +1,4 @@
-package com.example.onlineshop.service.item;
+package com.example.onlineshop.service;
 
 import com.example.onlineshop.model.Item;
 import com.example.onlineshop.repository.ItemRepository;
@@ -11,23 +11,28 @@ import javax.persistence.EntityExistsException;
 import java.util.Collection;
 
 @Service
-public class ItemServiceImpl implements ItemService{
+public class ItemService implements IService<Item,Long> {
 
     private final ItemRepository itemRepository;
 
     @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository) {
+    public ItemService(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 
     @Override
-    public Item findItem(Long id) {
+    public Collection<Item> findAll() {
+        return this.itemRepository.findAll();
+    }
+
+    @Override
+    public Item findById(Long id) {
         return this.itemRepository.findById(id)
                 .orElseThrow(()->new ResourceNotFoundException("Item with id [" + id + "] not found"));
     }
 
     @Override
-    public Item saveItem(Item item) {
+    public Item save(Item item) {
         Example<Item> itemExample = Example.of(item);
         if (this.itemRepository.exists(itemExample)){
             throw new EntityExistsException("Item [" + item.getName() + " " + item.getVendorCode() +
@@ -37,8 +42,8 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public void updateItem(Long id, Item updatedItem) {
-        Item item = findItem(id);
+    public void update(Long id, Item updatedItem) {
+        Item item = findById(id);
         if (!item.equals(updatedItem)){
             item.setName(updatedItem.getName());
             item.setManufacturer(updatedItem.getManufacturer());
@@ -49,13 +54,8 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Override
-    public void deleteItem(Long id) {
-        Item item = findItem(id);
+    public void deleteById(Long id) {
+        Item item = findById(id);
         this.itemRepository.delete(item);
-    }
-
-    @Override
-    public Collection<Item> findAllItems() {
-        return this.itemRepository.findAll();
     }
 }
