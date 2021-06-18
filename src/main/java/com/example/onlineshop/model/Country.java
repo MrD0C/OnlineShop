@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
-//Todo переделать toString
 @Data
 @Entity
 @Table(name = "countries",
@@ -40,11 +39,9 @@ public final class Country extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Country{" +
-                "name='" + name + '\'' +
-                ", alpha2Code='" + alpha2Code + '\'' +
-                ", alpha3Code='" + alpha3Code + '\'' +
-                ", numeric='" + numeric + '\'' +
-                '}';
+        return "Country:" + this.getName() +
+                "\nAlpha2Code:" + this.getAlpha2Code() +
+                "\nAlpha3Code:" + this.getAlpha3Code() +
+                "\nNumeric:" + this.getNumeric();
     }
 }

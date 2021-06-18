@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
-//Todo создать toString
 @Data
 @Entity
 @Table(name = "customers",
@@ -48,5 +47,12 @@ public class Customer extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(birthDate, address, balance, gender);
+    }
+
+    @Override
+    public String toString() {
+        return "Customer:" + this.getLastName() + " " + this.getLastName() +
+                "\nBirth date:" + this.getBirthDate() +
+                "\nGender:" + this.getGender();
     }
 }

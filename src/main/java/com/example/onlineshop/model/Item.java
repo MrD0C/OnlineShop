@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-//Todo создать toString
 @Data
 @Entity
 @Table(name = "items",
@@ -44,5 +43,13 @@ public class Item extends NamedEntity {
     @Override
     public int hashCode() {
         return Objects.hash(manufacturer, vendorCode, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Item:" + this.getName() +
+                "\nManufacturer:" + this.getManufacturer() +
+                "\nVendor code:" + this.getVendorCode() +
+                "\nPrice:" + this.getPrice();
     }
 }

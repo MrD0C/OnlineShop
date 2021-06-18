@@ -1,7 +1,6 @@
 package com.example.onlineshop.service.transaction;
 
 import com.example.onlineshop.model.transaction.Transaction;
-import com.example.onlineshop.model.transaction.TransactionType;
 import com.example.onlineshop.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +23,11 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public void doTransactionDeposit(Long customerId, BigDecimal amount) {
-        this.transactionRepository.save(new Transaction(amount, TransactionType.DEPOSIT, customerId));
+
     }
 
     @Override
     public void doTransactionOnline(Long customerId, BigDecimal amount) {
-        this.transactionRepository.save(new Transaction(amount, TransactionType.ONLINE, customerId));
+
     }
 }

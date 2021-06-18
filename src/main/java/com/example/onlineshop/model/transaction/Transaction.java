@@ -1,5 +1,6 @@
 package com.example.onlineshop.model.transaction;
 
+import com.example.onlineshop.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
@@ -7,10 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
-//Todo связать customer и transaction через связь Many-To-One
-//Todo добавить equals и hashCode
 @Entity
 @Table(name = "transactions")
 @NoArgsConstructor
@@ -27,20 +27,28 @@ public final class Transaction{
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy hh:mm:ss")
     private final LocalDateTime transactionDate = LocalDateTime.now();
     @JsonIgnore
-    @Column(name = "customer_id",nullable = false)
-    private Long customerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    public Transaction(BigDecimal amount, TransactionType transactionType, Long customerId) {
-        this.amount = amount;
-        this.transactionType = transactionType;
-        this.customerId = customerId;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return transactionCode.equals(that.transactionCode) && amount.equals(that.amount) && transactionType == that.transactionType && transactionDate.equals(that.transactionDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionCode, amount, transactionType, transactionDate);
     }
 
     @Override
     public String toString(){
-        return "Transaction ID:" + transactionCode + "\n" +
-                "Timestamp:" + transactionDate + "\n" +
-                "Transaction Type:" + transactionType + "\n" +
-                "Amount:" + amount + "\n";
+        return "Transaction ID:" + this.transactionCode + "\n" +
+                "Timestamp:" + this.transactionDate + "\n" +
+                "Transaction Type:" + this.transactionType + "\n" +
+                "Amount:" + this.amount + "\n";
     }
 }

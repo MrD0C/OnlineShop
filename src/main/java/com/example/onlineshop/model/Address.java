@@ -8,17 +8,15 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
-//Todo добавить проверки для полей
-//Todo переделать toString
 @Data
 @Embeddable
 public class Address {
 
-    @NotBlank
+    @NotBlank(message = "City is mandatory")
     private String city;
-    @NotBlank
+    @NotBlank(message = "Street is mandatory")
     private String street;
-    @NotBlank
+    @NotBlank(message = "House number is mandatory")
     private String houseNumber;
     private String flat = "";
     @ManyToOne
@@ -40,12 +38,10 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "city='" + city + '\'' +
-                ", street='" + street + '\'' +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", flat='" + flat + '\'' +
-                ", country=" + country +
-                '}';
+        return "Country:" + this.country.getName() +
+                "\nCity:" + this.getCity() +
+                "\nHouse Number:" + this.getHouseNumber() +
+                "\nFlat:" + this.getFlat();
+
     }
 }
