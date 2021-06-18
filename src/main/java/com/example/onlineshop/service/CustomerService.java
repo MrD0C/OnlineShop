@@ -13,50 +13,50 @@ import java.util.Collection;
 @Service
 public class CustomerService implements IService<Customer, Long> {
 
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository repository;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public CustomerService(CustomerRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Collection<Customer> findAll() {
-        return this.customerRepository.findAll();
+        return this.repository.findAll();
     }
 
     @Override
     public Customer findById(Long id) {
-        return this.customerRepository.findById(id)
+        return this.repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id [" + id + "] not found"));
     }
 
     @Override
-    public Customer save(Customer customer) {
-        Example<Customer> customerExample = Example.of(customer);
-        if (this.customerRepository.exists(customerExample)) {
-            throw new EntityExistsException("Customer [" + customer.getFirstName() + " " + customer.getLastName() +
+    public Customer save(Customer entity) {
+        Example<Customer> example = Example.of(entity);
+        if (this.repository.exists(example)) {
+            throw new EntityExistsException("Customer [" + entity.getFirstName() + " " + entity.getLastName() +
                     "] already exists");
         }
-        return this.customerRepository.save(customer);
+        return this.repository.save(entity);
     }
 
     @Override
-    public void update(Long id, Customer updatedCustomer) {
+    public void update(Long id, Customer entity) {
         Customer customer = findById(id);
-        if (!customer.equals(updatedCustomer)) {
-            customer.setLastName(updatedCustomer.getLastName());
-            customer.setFirstName(updatedCustomer.getFirstName());
-            customer.setGender(updatedCustomer.getGender());
-            customer.setAddress(updatedCustomer.getAddress());
-            customer.setBirthDate(updatedCustomer.getBirthDate());
-            this.customerRepository.save(customer);
+        if (!customer.equals(entity)) {
+            customer.setLastName(entity.getLastName());
+            customer.setFirstName(entity.getFirstName());
+            customer.setGender(entity.getGender());
+            customer.setAddress(entity.getAddress());
+            customer.setBirthDate(entity.getBirthDate());
+            this.repository.save(customer);
         }
     }
 
     @Override
     public void deleteById(Long id) {
         Customer customer = findById(id);
-        this.customerRepository.delete(customer);
+        this.repository.delete(customer);
     }
 }

@@ -11,51 +11,51 @@ import javax.persistence.EntityExistsException;
 import java.util.Collection;
 
 @Service
-public class ItemService implements IService<Item,Long> {
+public class ItemService implements IService<Item, Long> {
 
-    private final ItemRepository itemRepository;
+    private final ItemRepository repository;
 
     @Autowired
-    public ItemService(ItemRepository itemRepository) {
-        this.itemRepository = itemRepository;
+    public ItemService(ItemRepository repository) {
+        this.repository = repository;
     }
 
     @Override
     public Collection<Item> findAll() {
-        return this.itemRepository.findAll();
+        return this.repository.findAll();
     }
 
     @Override
     public Item findById(Long id) {
-        return this.itemRepository.findById(id)
-                .orElseThrow(()->new ResourceNotFoundException("Item with id [" + id + "] not found"));
+        return this.repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Item with id [" + id + "] not found"));
     }
 
     @Override
-    public Item save(Item item) {
-        Example<Item> itemExample = Example.of(item);
-        if (this.itemRepository.exists(itemExample)){
-            throw new EntityExistsException("Item [" + item.getName() + " " + item.getVendorCode() +
+    public Item save(Item entity) {
+        Example<Item> example = Example.of(entity);
+        if (this.repository.exists(example)) {
+            throw new EntityExistsException("Item [" + entity.getName() + " " + entity.getVendorCode() +
                     "] already exists");
         }
-        return this.itemRepository.save(item);
+        return this.repository.save(entity);
     }
 
     @Override
-    public void update(Long id, Item updatedItem) {
+    public void update(Long id, Item entity) {
         Item item = findById(id);
-        if (!item.equals(updatedItem)){
-            item.setName(updatedItem.getName());
-            item.setManufacturer(updatedItem.getManufacturer());
-            item.setPrice(updatedItem.getPrice());
-            item.setVendorCode(updatedItem.getVendorCode());
-            this.itemRepository.save(item);
+        if (!item.equals(entity)) {
+            item.setName(entity.getName());
+            item.setManufacturer(entity.getManufacturer());
+            item.setPrice(entity.getPrice());
+            item.setVendorCode(entity.getVendorCode());
+            this.repository.save(item);
         }
     }
 
     @Override
     public void deleteById(Long id) {
         Item item = findById(id);
-        this.itemRepository.delete(item);
+        this.repository.delete(item);
     }
 }

@@ -1,47 +1,46 @@
 package com.example.onlineshop.controller;
 
-import com.example.onlineshop.model.Item;
+import com.example.onlineshop.model.Country;
 import com.example.onlineshop.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
-@Validated
 @RestController
-@RequestMapping("api/v1/items")
-public class ItemController implements IRestController<Item, Long> {
+@RequestMapping("/api/v1/countries")
+public class CountryController implements IRestController<Country,Long> {
 
-    private final IService<Item, Long> service;
+    private final IService<Country,Long> service;
 
     @Autowired
-    public ItemController(IService<Item, Long> service) {
+    public CountryController(IService<Country, Long> service) {
         this.service = service;
     }
 
     @Override
-    public ResponseEntity<Collection<Item>> findAll() {
-        Collection<Item> collection = this.service.findAll();
+    public ResponseEntity<Collection<Country>> findAll() {
+        Collection<Country> collection = this.service.findAll();
         return new ResponseEntity<>(collection, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Item> findById(Long id) {
-        Item entity = this.service.findById(id);
+    public ResponseEntity<Country> findById(Long id) {
+        Country entity = this.service.findById(id);
         return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Item> save(Item entity) {
-        Item savedEntity = this.service.save(entity);
+    public ResponseEntity<Country> save(Country entity) {
+        Country savedEntity = this.service.save(entity);
         return new ResponseEntity<>(savedEntity, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, Item entity) {
+    public ResponseEntity<Void> update(Long id, Country entity) {
         this.service.update(id, entity);
         return new ResponseEntity<>(HttpStatus.OK);
     }

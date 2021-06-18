@@ -22,25 +22,25 @@ public class CustomerController implements IRestController<Customer, Long> {
 
     @Override
     public ResponseEntity<Collection<Customer>> findAll() {
-        Collection<Customer> customerCollection = this.service.findAll();
-        return new ResponseEntity<>(customerCollection, HttpStatus.OK);
+        Collection<Customer> collection = this.service.findAll();
+        return new ResponseEntity<>(collection, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<Customer> findById(Long id) {
-        Customer requestedCustomer = this.service.findById(id);
-        return new ResponseEntity<>(requestedCustomer, HttpStatus.FOUND);
+        Customer entity = this.service.findById(id);
+        return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<Customer> save(Customer customer) {
-        Customer savedCustomer = this.service.save(customer);
-        return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);
+    public ResponseEntity<Customer> save(Customer entity) {
+        Customer savedEntity = this.service.save(entity);
+        return new ResponseEntity<>(savedEntity, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<Void> update(Long id, Customer customer) {
-        this.service.update(id, customer);
+    public ResponseEntity<Void> update(Long id, Customer entity) {
+        this.service.update(id, entity);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
