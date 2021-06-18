@@ -1,4 +1,4 @@
-package com.example.onlineshop.controller;
+package com.example.onlineshop.controller.open;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

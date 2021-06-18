@@ -14,11 +14,15 @@ public class Address {
 
     @NotBlank(message = "City is mandatory")
     private String city;
+
     @NotBlank(message = "Street is mandatory")
     private String street;
+
     @NotBlank(message = "House number is mandatory")
     private String houseNumber;
+
     private String flat = "";
+
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;

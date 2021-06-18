@@ -8,5 +8,5 @@ import java.util.UUID;
 
 public interface TransactionRepository extends JpaRepository<Transaction, UUID> {
 
-    Collection<Transaction> getAllByCustomerId(Long customerId);
+    Collection<Transaction> findAllByCustomerId(Long customerId);
 }

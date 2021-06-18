@@ -2,7 +2,6 @@ package com.example.onlineshop.model.transaction;
 
 import com.example.onlineshop.model.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -19,17 +18,42 @@ public final class Transaction{
     @Id
     @Column(name = "transaction_id",nullable = false)
     private final UUID transactionCode = UUID.randomUUID();
+
     @Column(name = "amount",nullable = false)
     private BigDecimal amount;
+
     @Column(name = "transaction_type",nullable = false)
     private TransactionType transactionType;
+
     @Column(name = "transaction_date",nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy hh:mm:ss")
     private final LocalDateTime transactionDate = LocalDateTime.now();
-    @JsonIgnore
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    public Transaction(BigDecimal amount,TransactionType type,Customer customer){
+        this.amount = amount;
+        this.transactionType = type;
+        this.customer = customer;
+    }
+
+    public UUID getTransactionCode() {
+        return transactionCode;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public LocalDateTime getTransactionDate() {
+        return transactionDate;
+    }
 
     @Override
     public boolean equals(Object o) {

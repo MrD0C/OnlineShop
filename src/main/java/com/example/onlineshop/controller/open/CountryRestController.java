@@ -1,4 +1,4 @@
-package com.example.onlineshop.controller;
+package com.example.onlineshop.controller.open;
 
 import com.example.onlineshop.model.Country;
 import com.example.onlineshop.service.IService;
@@ -12,12 +12,12 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/v1/countries")
-public class CountryController implements IRestController<Country,Long> {
+public class CountryRestController implements IRestController<Country,Long> {
 
     private final IService<Country,Long> service;
 
     @Autowired
-    public CountryController(IService<Country, Long> service) {
+    public CountryRestController(IService<Country, Long> service) {
         this.service = service;
     }
 

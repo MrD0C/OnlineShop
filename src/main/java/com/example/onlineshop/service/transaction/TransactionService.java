@@ -1,15 +1,15 @@
 package com.example.onlineshop.service.transaction;
 
 import com.example.onlineshop.model.transaction.Transaction;
+import com.example.onlineshop.model.transaction.TransactionType;
 
 import java.math.BigDecimal;
 import java.util.Collection;
 
 public interface TransactionService {
 
-    Collection<Transaction> getTransactionsByCustomerId(Long id);
+    Collection<Transaction> findCustomerTransactions(Long customerId);
 
-    void doTransactionDeposit(Long customerId, BigDecimal amount);
+    Transaction doTransaction(Long customerId, BigDecimal amount, TransactionType type);
 
-    void doTransactionOnline(Long customerId, BigDecimal amount);
 }

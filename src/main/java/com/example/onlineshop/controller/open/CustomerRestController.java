@@ -1,4 +1,4 @@
-package com.example.onlineshop.controller;
+package com.example.onlineshop.controller.open;
 
 import com.example.onlineshop.model.Customer;
 import com.example.onlineshop.service.IService;
@@ -11,12 +11,12 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("api/v1/customers")
-public class CustomerController implements IRestController<Customer, Long> {
+public class CustomerRestController implements IRestController<Customer, Long> {
 
     private final IService<Customer, Long> service;
 
     @Autowired
-    public CustomerController(IService<Customer, Long> service) {
+    public CustomerRestController(IService<Customer, Long> service) {
         this.service = service;
     }
 

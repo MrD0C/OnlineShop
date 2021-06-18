@@ -17,10 +17,13 @@ public final class Country extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;
+
     @Column(name = "alpha2Code", nullable = false)
     private String alpha2Code;
+
     @Column(name = "alpha3Code", nullable = false)
     private String alpha3Code;
+
     @Column(name = "numeric", nullable = false)
     private String numeric;
 

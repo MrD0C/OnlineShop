@@ -8,7 +8,6 @@ public class OnlineshopApplication {
 
     //Todo добавить логгер (долгий ящик)
     //Todo добавить класс Order
-    //Todo реализовать базовые Api взаимодействия для класса Transaction
     public static void main(String[] args) {
         SpringApplication.run(OnlineshopApplication.class, args);
     }
