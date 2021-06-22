@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.RollbackException;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -25,32 +26,37 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = EntityExistsException.class)
     public ResponseEntity<Object> handleEntityExistsException(EntityExistsException ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = RollbackException.class)
     public ResponseEntity<Object> handleRollBackException(RollbackException ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
+    }
+
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex){
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Object> handleGlobalException(Exception ex) {
-        return buildResponseEntity(apiErrorService.getApiError(ex));
+        return buildResponseEntity(this.apiErrorService.getApiError(ex));
     }
 
     private ResponseEntity<Object> buildResponseEntity(ApiError error) {

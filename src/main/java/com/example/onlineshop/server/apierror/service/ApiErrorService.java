@@ -1,6 +1,7 @@
 package com.example.onlineshop.server.apierror.service;
 
 import com.example.onlineshop.server.apierror.ApiError;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.RollbackException;
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 @Service
@@ -51,7 +53,7 @@ public class ApiErrorService {
 
     public ApiError getApiError(MethodArgumentNotValidException exception){
         return ApiError.builder()
-                .httpStatus(HttpStatus.CONFLICT)
+                .httpStatus(HttpStatus.BAD_REQUEST)
                 .message("Validation failed")
                 .debugMessage(exception.getLocalizedMessage())
                 .apiSubErrors(this.validationErrorService.addValidationErrors(exception.getFieldErrors()))
@@ -73,6 +75,16 @@ public class ApiErrorService {
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .message("Unhandled exception")
                 .debugMessage(exception.getLocalizedMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    public ApiError getApiError(ConstraintViolationException exception){
+        return ApiError.builder()
+                .httpStatus(HttpStatus.BAD_REQUEST)
+                .message("Validation failed")
+                .debugMessage(exception.getLocalizedMessage())
+                .apiSubErrors(this.validationErrorService.addValidationErrors(exception.getConstraintViolations()))
                 .timestamp(LocalDateTime.now())
                 .build();
     }
