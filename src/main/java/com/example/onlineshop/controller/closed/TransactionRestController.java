@@ -1,6 +1,7 @@
 package com.example.onlineshop.controller.closed;
 
 import com.example.onlineshop.model.transaction.Transaction;
+import com.example.onlineshop.model.transaction.TransactionDTO;
 import com.example.onlineshop.service.transaction.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

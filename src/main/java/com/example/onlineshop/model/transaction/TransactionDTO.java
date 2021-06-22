@@ -1,4 +1,4 @@
-package com.example.onlineshop.controller.closed;
+package com.example.onlineshop.model.transaction;
 
 import com.example.onlineshop.model.transaction.TransactionType;
 import lombok.Data;
