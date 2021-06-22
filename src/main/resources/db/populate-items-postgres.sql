@@ -1,5 +1,3 @@
-INSERT INTO CUSTOMERS VALUES (1,'Дима','Золотухин','Самара','28','140','Стара-Загора','1999-04-20',0,1);
-
 INSERT INTO ITEMS VALUES (1,'PS5 DE','Playstation',37999.00,'23495043');
 INSERT INTO ITEMS VALUES (2,'PS5','Playstation',46999.00,'9437385');
 INSERT INTO ITEMS VALUES (3,'Xbox Series X','Microsoft',45590.00,'3238529823');

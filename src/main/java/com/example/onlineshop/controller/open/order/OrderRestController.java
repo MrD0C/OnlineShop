@@ -23,13 +23,13 @@ public class OrderRestController {
     }
 
     @GetMapping("/all/{id}")
-    public ResponseEntity<List<OrderInfo>> findAll(@PathVariable Long id){
+    public ResponseEntity<List<OrderInfo>> findAll(@PathVariable Long id) {
         List<OrderInfo> list = this.orderService.findAllOrders(id);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createOrder(@Valid @RequestBody OrderDTO orderDTO){
+    public ResponseEntity<Void> createOrder(@Valid @RequestBody OrderDTO orderDTO) {
         this.orderService.createOrder(orderDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

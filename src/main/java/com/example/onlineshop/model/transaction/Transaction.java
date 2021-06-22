@@ -13,27 +13,27 @@ import java.util.UUID;
 @Entity
 @Table(name = "transactions")
 @NoArgsConstructor
-public final class Transaction{
+public final class Transaction {
 
     @Id
-    @Column(name = "transaction_id",nullable = false)
+    @Column(name = "transaction_id", nullable = false)
     private final UUID transactionCode = UUID.randomUUID();
 
-    @Column(name = "amount",nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "transaction_type",nullable = false)
+    @Column(name = "transaction_type", nullable = false)
     private TransactionType transactionType;
 
-    @Column(name = "transaction_date",nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy hh:mm:ss")
+    @Column(name = "transaction_date", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private final LocalDateTime transactionDate = LocalDateTime.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    public Transaction(BigDecimal amount,TransactionType type,Customer customer){
+    public Transaction(BigDecimal amount, TransactionType type, Customer customer) {
         this.amount = amount;
         this.transactionType = type;
         this.customer = customer;
@@ -69,7 +69,7 @@ public final class Transaction{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Transaction ID:" + this.transactionCode + "\n" +
                 "Timestamp:" + this.transactionDate + "\n" +
                 "Transaction Type:" + this.transactionType + "\n" +

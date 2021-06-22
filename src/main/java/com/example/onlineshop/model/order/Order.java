@@ -15,13 +15,15 @@ import java.util.UUID;
 public class Order {
 
     @Id
-    @Column(name = "order_id",nullable = false)
+    @Column(name = "order_id", nullable = false)
     private final UUID order_id = UUID.randomUUID();
 
     private LocalDateTime date = LocalDateTime.now();
+
     @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
     @OneToMany(fetch = FetchType.EAGER)
     private List<Item> items;
 }

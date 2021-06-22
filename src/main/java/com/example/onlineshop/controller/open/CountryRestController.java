@@ -12,9 +12,9 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/api/v1/countries")
-public class CountryRestController implements IRestController<Country,Long> {
+public class CountryRestController implements IRestController<Country, Long> {
 
-    private final IService<Country,Long> service;
+    private final IService<Country, Long> service;
 
     @Autowired
     public CountryRestController(IService<Country, Long> service) {

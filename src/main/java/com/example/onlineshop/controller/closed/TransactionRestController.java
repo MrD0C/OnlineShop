@@ -27,16 +27,16 @@ public class TransactionRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Collection<Transaction>> findCustomerTransactions(@Min(value = 1, message = "ID must be equal or greater than 1")
-                                                                                @PathVariable Long id){
+                                                                            @PathVariable Long id) {
         Collection<Transaction> collection = this.service.findCustomerTransactions(id);
         return new ResponseEntity<>(collection, HttpStatus.OK);
     }
 
     @PostMapping("/commit")
-    public ResponseEntity<Transaction> doTransaction(@Valid @RequestBody TransactionDTO transactionDTO){
+    public ResponseEntity<Transaction> doTransaction(@Valid @RequestBody TransactionDTO transactionDTO) {
         Transaction entity = this.service.doTransaction(transactionDTO.getCustomerId(),
-                transactionDTO.getAmount(),transactionDTO.getTransactionType());
-        return new ResponseEntity<>(entity,HttpStatus.OK);
+                transactionDTO.getAmount(), transactionDTO.getTransactionType());
+        return new ResponseEntity<>(entity, HttpStatus.OK);
     }
 
 }

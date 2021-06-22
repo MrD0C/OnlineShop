@@ -31,15 +31,15 @@ public class OrderService {
 
     public List<OrderInfo> findAllOrders(Long customerId) {
         Customer customer = this.customerService.findById(customerId);
-        List<Order> list =  this.orderRepository.findAllByCustomer(customer);
+        List<Order> list = this.orderRepository.findAllByCustomer(customer);
         List<OrderInfo> orderInfoList = new ArrayList<>();
-        for (Order order:list){
+        for (Order order : list) {
             orderInfoList.add(mapToOrderInfo(order));
         }
         return orderInfoList;
     }
 
-    private OrderInfo mapToOrderInfo(Order order){
+    private OrderInfo mapToOrderInfo(Order order) {
         OrderInfo orderInfo = new OrderInfo();
         orderInfo.setUuid(order.getOrder_id());
         orderInfo.setDate(order.getDate());
@@ -49,11 +49,11 @@ public class OrderService {
         return orderInfo;
     }
 
-    public void createOrder(OrderDTO orderDTO){
+    public void createOrder(OrderDTO orderDTO) {
         List<Item> list = new ArrayList<>();
         List<Long> itemIds = orderDTO.getItemIdList();
         BigDecimal totalPrice = BigDecimal.ZERO;
-        for (Long id:itemIds){
+        for (Long id : itemIds) {
             Item item = this.itemService.findById(id);
             totalPrice = totalPrice.add(item.getPrice());
             list.add(item);
@@ -63,6 +63,6 @@ public class OrderService {
         order.setCustomer(customer);
         order.setItems(list);
         this.orderRepository.save(order);
-        this.transactionService.doTransaction(orderDTO.getCustomerId(),totalPrice, TransactionType.ONLINE);
+        this.transactionService.doTransaction(orderDTO.getCustomerId(), totalPrice, TransactionType.ONLINE);
     }
 }
