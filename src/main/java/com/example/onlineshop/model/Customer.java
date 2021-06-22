@@ -21,8 +21,6 @@ public class Customer extends Person {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate birthDate;
 
-    private BigDecimal balance = BigDecimal.ZERO;
-
     @NotNull
     @Enumerated
     private Gender gender;
@@ -41,12 +39,12 @@ public class Customer extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(birthDate, customer.birthDate) && Objects.equals(address, customer.address) && Objects.equals(balance, customer.balance) && gender == customer.gender;
+        return Objects.equals(birthDate, customer.birthDate) && Objects.equals(address, customer.address)  && gender == customer.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(birthDate, address, balance, gender);
+        return Objects.hash(birthDate, address, gender);
     }
 
     @Override
